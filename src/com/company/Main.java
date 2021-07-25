@@ -32,6 +32,7 @@ public class Main {
                     Lamp lamp2 = new Lamp(8,4000,"E27","philips",Lamp.Type.halogen,Lamp.Color.yellow);
                     System.out.println(lamp2.getInString());
                 }
+
                 case 0: {
                     isRun = false;
                 }

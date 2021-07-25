@@ -79,7 +79,7 @@ public class Lamp {
     public void setPower(int power) throws Exception {
 
         if (power <= 0) {
-            throw new Exception("engine power must be           grate than 0");
+            throw new Exception("power must be           grate than 0");
         }
         this.power = power;
 
