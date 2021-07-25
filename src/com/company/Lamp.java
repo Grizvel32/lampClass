@@ -84,12 +84,23 @@ public class Lamp {
         this.power = power;
 
     }
+
+    public void setColourTemperature(int colourTemperature) throws Exception {
+        if (colourTemperature <= 0 || colourTemperature > 6500 ) {
+            throw new Exception("power must be grate than 0 or grater 6500");
+        }
+        this.colourTemperature = colourTemperature;
+    }
     //endregion
 
     //region Getters
 
     public int getPower(){
         return power;
+    }
+
+    public int getColourTemperature() {
+        return colourTemperature;
     }
     //endregion
 
