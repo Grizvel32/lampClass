@@ -31,10 +31,10 @@ public class Main {
                     int colourTemperature = ConsoleHelper.InputInt("Введите цветовую температуру (К): ");
                     String base = ConsoleHelper.InputString("Введите цоколь лампы:  ");
                     String brandName = ConsoleHelper.InputString("Введите марку лампы:  ");
-                    int typeIndex = ConsoleHelper.InputInt("Введите тип лампы (1-светодиодная, 2- накаливания, 3-галогеновая)", 1, 3);
+                    int typeIndex = ConsoleHelper.InputInt("Введите тип лампы (0-светодиодная, 1- накаливания, 2-галогеновая)", 0, 2);
                     Lamp.Type type = Lamp.Type.values()[typeIndex];
 
-                    int colorIndex = ConsoleHelper.InputInt("Введите индекс цвета (1-красный,2 - желтый, 3- белый): ", 1, 3);
+                    int colorIndex = ConsoleHelper.InputInt("Введите индекс цвета (0-красный,1 - желтый, 2- белый): ", 0, 2);
                     Lamp.Color color = Lamp.Color.values()[colorIndex];
 
                     lampsManager.addLamp(powerLamp, colourTemperature, base, brandName, type, color);
