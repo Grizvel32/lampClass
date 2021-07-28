@@ -34,7 +34,8 @@ public class Lamp {
     //endregion
 
     //region Variables
-    private int power;
+    private int id;
+    private int powerLamp;
     private int colourTemperature;
     private String base;
     private String brandName;
@@ -46,7 +47,7 @@ public class Lamp {
     //region Constructor
 
     public Lamp() {
-        power = 12;
+        powerLamp = 12;
         colourTemperature = 4000;
         base = "E27";
         brandName = "ecola";
@@ -55,8 +56,9 @@ public class Lamp {
     }
 
 
-    public Lamp(int power, int colourTemperature, String base, String brandName, Type type, Color color) {
-        this.power = power;
+    public Lamp(int id, int power, int colourTemperature, String base, String brandName, Type type, Color color) {
+        this.id = id;
+        this.powerLamp = power;
         this.colourTemperature = colourTemperature;
         this.base = base;
         this.brandName = brandName;
@@ -64,8 +66,9 @@ public class Lamp {
         this.color = color;
     }
 
-    public Lamp(Lamp lamp) {
-        this.power = power;
+    public Lamp(int id, Lamp lamp) {
+        this.id = id;
+        this.powerLamp = powerLamp;
         this.colourTemperature = colourTemperature;
         this.base = base;
         this.brandName = brandName;
@@ -76,12 +79,12 @@ public class Lamp {
 
     //region Setters
 
-    public void setPower(int power) throws Exception {
+    public void setPowerLamp(int powerLamp) throws Exception {
 
-        if (power <= 0) {
-            throw new Exception("power must be grate than 0");
+        if (powerLamp <= 0 || powerLamp > 100) {
+            throw new Exception("power must be grate than 0 and less 100");
         }
-        this.power = power;
+        this.powerLamp = powerLamp;
 
     }
 
@@ -91,12 +94,49 @@ public class Lamp {
         }
         this.colourTemperature = colourTemperature;
     }
+
+    public void setBase(String base) {
+        this.base = base;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
     //endregion
 
     //region Getters
 
-    public int getPower(){
-        return power;
+    public int getPowerLamp(){
+        return powerLamp;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public String getBase() {
+        return base;
+    }
+
+    public String getBrandName() {
+        return brandName;
     }
 
     public int getColourTemperature() {
@@ -107,7 +147,8 @@ public class Lamp {
     public String getInString() {
         String output = "";
 
-        output += "мощность лампы " + power + "(Вт)\n";
+        output += "ИД: " + id + "\n";
+        output += "мощность лампы " + powerLamp + "(Вт)\n";
         output += "цветовая температура " + colourTemperature + "(К)\n";
         output += "цоколь " + base + "\n";
         output += "марка " + brandName + "\n";

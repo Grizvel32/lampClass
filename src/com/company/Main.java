@@ -1,48 +1,113 @@
 package com.company;
 
-import java.util.Scanner;
-
 public class Main {
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        int powerLamp, colourTemperature, base, brandName,type;
-
+        LampsManager lampsManager = new LampsManager();
         int action = -1;
         boolean isRun = true;
 
         while (isRun) {
+            lampsManager.printLamps();
 
-            System.out.println("Меню:");
-            System.out.println("1. Создать стандартную лампочку ");
-            System.out.println("2. Создать лампочку с заданными параметрами");
+            ConsoleHelper.PrintMessage("Меню:");
+            ConsoleHelper.PrintMessage("1. Добавить лампу в конец списка");
+            ConsoleHelper.PrintMessage("2. Удалить лампу по ИД");
+            ConsoleHelper.PrintMessage("3. Изменить мощность лампы по ИД");
+            ConsoleHelper.PrintMessage("4. Изменить цветовую температуру лампы по ИД");
+            ConsoleHelper.PrintMessage("5. Изменить цоколь лампы по ИД");
+            ConsoleHelper.PrintMessage("6. Изменить тип лампы по ИД");
+            ConsoleHelper.PrintMessage("7. Изменить цвет лампы по ИД");
 
-            System.out.println("0. Выход");
+            ConsoleHelper.PrintMessage("0. Выход");
 
-            System.out.print("Введите номер пункта меню: ");
-            action = input.nextInt();
+            action = ConsoleHelper.InputInt("Введите номер пункта меню: ", 0, 5);
+
 
             switch (action) {
                 case 1: {
-                    Lamp lamp1 = new Lamp();
-                    System.out.println(lamp1.getInString());
+
+                    int powerLamp = ConsoleHelper.InputInt("Введите мощность лампы  (Вт): ");
+                    int colourTemperature = ConsoleHelper.InputInt("Введите цветовую температуру (К): ");
+                    String base = ConsoleHelper.InputString("Введите цоколь лампы:  ");
+                    String brandName = ConsoleHelper.InputString("Введите марку лампы:  ");
+                    int typeIndex = ConsoleHelper.InputInt("Введите тип лампы (1-светодиодная, 2- накаливания, 3-галогеновая)", 1, 3);
+                    Lamp.Type type = Lamp.Type.values()[typeIndex];
+
+                    int colorIndex = ConsoleHelper.InputInt("Введите индекс цвета (1-красный,2 - желтый, 3- белый): ", 1, 3);
+                    Lamp.Color color = Lamp.Color.values()[colorIndex];
+
+                    lampsManager.addLamp(powerLamp, colourTemperature, base, brandName, type, color);
                 }
                 break;
                 case 2: {
-                    Lamp lamp2 = new Lamp(8,4000,"E27","philips",Lamp.Type.halogen,Lamp.Color.yellow);
-                    System.out.println(lamp2.getInString());
+                    try {
+                        int id = ConsoleHelper.InputInt("Введите ИД лампы для удаления: ");
+                        lampsManager.deleteLamp(id);
+                    } catch (Exception e) {
+                        ConsoleHelper.PrintMessage(e.getMessage());
+                    }
                 }
-
-                case 0: {
-                    isRun = false;
+                break;
+                case 3: {
+                    try {
+                        int id = ConsoleHelper.InputInt("Введите ИД  для изменения мощности лампы: ");
+                        int powerLamp = ConsoleHelper.InputInt("Введите мощность лампы (Вт): ");
+                        lampsManager.getByIdLamp(id).setPowerLamp(powerLamp);
+                    } catch (Exception e) {
+                        ConsoleHelper.PrintMessage(e.getMessage());
+                    }
+                }
+                break;
+                case 4: {
+                    try {
+                        int id = ConsoleHelper.InputInt("Введите ИД  для изменения цветовой температуры лампы (К): ");
+                        int colourTemperature = ConsoleHelper.InputInt("Введите цветовую температуру лампы: ");
+                        lampsManager.getByIdLamp(id).setColourTemperature(colourTemperature);
+                    } catch (Exception e) {
+                        ConsoleHelper.PrintMessage(e.getMessage());
+                    }
                 }
                 break;
 
-                default: {
-                    System.out.println("Ошибка. Такой команды не существует");
+                case 5: {
+                    try {
+                        int id = ConsoleHelper.InputInt("Введите ИД  для изменения цоколя лампы: ");
+                        String base = ConsoleHelper.InputString("Введите цоколь лампы: ");
+                        lampsManager.getByIdLamp(id).setBase(base);
+                    } catch (Exception e) {
+                        ConsoleHelper.PrintMessage(e.getMessage());
+                    }
+                    break;
+
                 }
-                break;
-            }
+                case 6:
+                    try {
+                        int id = ConsoleHelper.InputInt("Введите ИД  для изменения типа лампы: ");
+                        int typeIndex = ConsoleHelper.InputInt("Введите индекс типа лампы (1-светодиодная, 2- накаливания, 3-галогеновая)", 1, 3);
+                        Lamp.Type type = Lamp.Type.values()[typeIndex];
+
+                        lampsManager.getByIdLamp(id).setType(type);
+                    } catch (Exception e) {
+                        ConsoleHelper.PrintMessage(e.getMessage());
+                    }
+                    break;
+
+                case 7:
+                    try {
+                        int id = ConsoleHelper.InputInt("Введите ИД  для изменения цвета лампы: ");
+                        int colorIndex = ConsoleHelper.InputInt("Введите индекс цвета (1-красный,2 - желтый, 3- белый): ", 1, 3);
+                        Lamp.Color color = Lamp.Color.values()[colorIndex];
+                    } catch (Exception e) {
+                        ConsoleHelper.PrintMessage(e.getMessage());
+                    }
+                    break;
             }
         }
     }
+}
+
+
+
+
+
